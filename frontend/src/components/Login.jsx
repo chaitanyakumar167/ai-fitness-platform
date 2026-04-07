@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate ,Link} from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -13,20 +13,19 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     try {
-      
-      const response = await axios.post('http://localhost:5000/api/auth/login', credentials);
-      
-      
-      localStorage.setItem('token', response.data.token);
-      
-      
-      navigate('/');
-      
+      const response = await axios.post(
+        "https://ai-fitness-platform-cc1u.onrender.com/api/auth/login",
+        credentials,
+      );
+
+      localStorage.setItem("token", response.data.token);
+
+      navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Try again.');
+      setError(err.response?.data?.message || "Login failed. Try again.");
     }
   };
 
@@ -36,11 +35,15 @@ export default function Login() {
         Welcome <span className="text-emerald-400">Back</span>
       </h2>
 
-      {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+      {error && (
+        <p className="text-red-500 text-sm text-center mb-4">{error}</p>
+      )}
 
       <form onSubmit={handleLogin} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+          <label className="block text-sm font-medium text-gray-300 mb-1">
+            Email
+          </label>
           <input
             type="email"
             name="email"
@@ -52,7 +55,9 @@ export default function Login() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-1">Password</label>
+          <label className="block text-sm font-medium text-gray-300 mb-1">
+            Password
+          </label>
           <input
             type="password"
             name="password"
@@ -71,8 +76,11 @@ export default function Login() {
         </button>
       </form>
       <p className="mt-6 text-center text-sm text-gray-400">
-        Don't have an account?{' '}
-        <Link to="/register" className="text-emerald-400 hover:text-emerald-300 font-medium">
+        Don't have an account?{" "}
+        <Link
+          to="/register"
+          className="text-emerald-400 hover:text-emerald-300 font-medium"
+        >
           Sign up here
         </Link>
       </p>

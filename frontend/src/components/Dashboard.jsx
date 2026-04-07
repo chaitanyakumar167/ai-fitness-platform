@@ -18,7 +18,7 @@ export default function Dashboard() {
           return;
         }
 
-        const response = await axios.get('http://localhost:5000/api/user/dashboard', {
+        const response = await axios.get('https://ai-fitness-platform-cc1u.onrender.com/api/user/dashboard', {
           headers: { Authorization: `Bearer ${token}` }
         });
         
